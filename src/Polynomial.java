@@ -111,33 +111,13 @@ public class Polynomial {
             c.next = h;
         }
         head = head.next;
+    }
 
-//        if (head == null){
-//            head = p1.head;
-//            return;
-//        }
-//        if (p1.head == null) return;
-//
-//        Monomial cur1 = head;
-//        Monomial cur2 = p1.head;
-//
-//        while (cur1 != null) {
-//            if (cur1.pow == cur2.pow) {
-//                cur1.coef += cur2.coef;
-//                cur1 = cur1.next;
-//                cur2 = cur2.next;
-//            }
-//            if (cur1.pow > cur2.pow) {
-//                while(cur2!=null){
-//                    this.addMon(cur2.coef,cur2.pow);
-//                }
-//                cur1=cur1.next;
-//                cur2=cur2.next;
-//            }
-//            if (cur1.pow < cur2.pow){
-//
-//            }
-//        }
+    public void change(double coef) {
+        Monomial m = head;
+        while (m.next != null)
+            m = m.next;
+        m.coef = coef;
     }
 
     public void multiplication(Polynomial p1) {
@@ -179,5 +159,17 @@ public class Polynomial {
         head = resH;
     }
 
-
+    public void deleteZeros() {
+        Monomial t1 = head;
+        Monomial t2 = head.next;
+        while (t2 != null) {
+            if (Math.abs(t2.coef) < 1e-8) {
+                t1.next = t2.next;
+                t2 = t1.next;
+            } else {
+                t1 = t2;
+                t2 = t2.next;
+            }
+        }
+    }
 }

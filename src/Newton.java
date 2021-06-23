@@ -1,6 +1,6 @@
 public class Newton extends Polynomial {
 
-    Polynomial result;
+    Polynomial result = new Polynomial();
 
     public Newton(Grid grid){
         Point[] points = grid.getPoints();
@@ -20,27 +20,33 @@ public class Newton extends Polynomial {
         Polynomial tmp3 = new Polynomial();
 
         for (int i = 0; i < points.length-1; i++){ //f(x0,x1)*(x-x0) + f(x0,x1,x2)*(x-x0)*(x-x1) + ... + f(x0,x1,...,xn)*(x-x0)*(x-x1)...(x-xn-1)
-            tmp3.addMon(-points[i].getX(),0);
-            tmp2.addition(tmp3);
+            tmp2.change(-points[i].getX());
             tmp1.multiplication(tmp2);
             tmp1.multiply(dd[i]);
-            this.addition(tmp1);
+            result.addition(tmp1);
             tmp1.multiply(1/dd[i]);
         }
+        result.deleteZeros();
     }
 
     public double[] calcDD(Point[] points){
+
         int len = points.length;
-        double[] res = new double[len];
-        double[] tmp1 = new double[len];
-        double[] tmp2 = new double[len];
-        for (int i = 0; i < len; i++) {
-            for (int j = 0; j < len; j++) {
-                tmp2[j] = (tmp1[j + 1] - tmp1[j]) / (points[j + 1].getX() - points[j].getX());
+        double[] res = new double[len-1];
+        double[] tmp1 = new double[len-1];
+        double[] tmp2 = new double[len-2];
+
+        for (int i = 0; i < len-1; i++) {
+            tmp1[i]= (points[i+1].getY() - points[i].getY()) / (points[i+1].getX() - points[i].getX());
+        }
+        for (int i = 0; i < len-2; i++) {
+            for (int j = 0; j < len-2; j++) {
+                tmp2[j] = (tmp1[j + 1] - tmp1[j]) / (points[j + i].getX() - points[j].getX());
             }
-            res[i] = tmp2[i];
+            res[i+1] = tmp2[0];
             tmp1 = tmp2;
-            tmp2 = new double[len];
+            double[] t = tmp1;
+            tmp2 = t;
         }
         return res;
     }

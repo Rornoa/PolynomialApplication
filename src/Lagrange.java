@@ -1,32 +1,39 @@
-public class Lagrange {
+public class Lagrange extends Polynomial {
+
     Polynomial result = new Polynomial();
-    public Lagrange(Grid grid) {
+
+    public Lagrange(Grid grid){
         Point[] points = grid.getPoints();
+        double k=1;
         int len = points.length;
-        double x = 0;
-        double num = 0;
-        Polynomial tmp1 = new Polynomial();
-        Polynomial tmp2 = new Polynomial();
+        Polynomial bi = new Polynomial();
+        bi.addMon(-1,0);
+        bi.addMon(1,1);
 
-        Polynomial tmp3 = new Polynomial();
+        for (int i = 0; i < len; i++) {
+            Polynomial base = new Polynomial();
+            base.addMon(1,0);
 
-        for (int i = 0; i < len; ) {
-            x = points[i].getX();
-            tmp1.addMon(1, 1);
-
-            for (int j = 0; j < len - 1; j++) {
-                if (j == i || (i == 0 && j == 1)){
-                    continue;
-                }
-                tmp2.addMon(1, 1);
-                num *= (x - points[j].getX());
-                tmp3.addMon(points[j].getX(), 0);
-                tmp2.addition(tmp3);
-                tmp1.multiplication(tmp2);
+            for (int j = 0; j < i; j++) {
+                bi.change(-points[j].getX());
+                base.multiplication(bi);
             }
-            tmp1.multiply(points[i].getY() / num);
-            result.addition(tmp1);
+            for (int j = i+1; j < len; j++) {
+                bi.change(-points[j].getX());
+                base.multiplication(bi);
+            }
+            for (int j = 0; j < i; j++){
+                k/= points[i].getX() - points[j].getX();
+            }
+            for (int j = i+1; j < len ; j++) {
+                k/=points[i].getX()-points[j].getX();
+            }
+
+            k *= points[i].getY();
+            base.multiply(k);
+            result.addition(base);
         }
+        result.deleteZeros();
     }
 
     public Polynomial getResult() {

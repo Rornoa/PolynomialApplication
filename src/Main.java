@@ -1,27 +1,27 @@
 public class Main {
     public static void main(String[] args) {
 
-        int steps = 6;
         Grid grid = new Grid(6, 1, 7);
         Point[] points = grid.getPoints();
 
-        Lagrange lP = new Lagrange(grid);
-        Polynomial resL = lP.getResult();
-        System.out.println("Lagrange ");
-        resL.print();
+        Polynomial lagrange = new Lagrange(grid);
+        System.out.printf("Lagrange polynomial:\t");
+        lagrange = ((Lagrange) lagrange).getResult();
+        lagrange.print();
+        Grid lGrid = new Grid(6, 1, 7);
 
-        Newton nP = new Newton(grid);
-        Polynomial resN = nP.getResult();
-        System.out.println("Newton ");
-        resN.print();
+        Polynomial newton = new Newton(grid);
+        System.out.printf("Newton polynomial:\t");
+        newton = ((Newton) newton).getResult();
+        newton.print();
+        Grid nGrid = new Grid(6,1,7);
 
-        System.out.println("");
-        System.out.printf("%15s%15s%15s%15s%15s%15s\n",     "",     "X",        "Y",        "f(X)",     "LAGRANGE",     "NEWTON");
-        for (int i = 0; i < points.length-1; i++) {
-            System.out.printf("%4d%16.6e%16.6e%16.6e%16.6e%16.6e%n",
-                    i, points[i].getX(), points[i].getY()
-                    );
+        Grid control = new Grid(6, 1, 7);
 
+        System.out.println("\n");
+        System.out.printf("%4s\t%-16s%-16s%-16s%-16s%-16s%n", "Point", "x", "y", "f(x)", "Lagrange", "Newton");
+        for (int i = 0; i < 6; i++) {
+            System.out.printf("%4d%16e%16e%16e%16e%16e%n", i, control.getPoints()[i].getX(), grid.getPoints()[i].getY(), control.getPoints()[i].getY(), lGrid.getPoints()[i].getY(), nGrid.getPoints()[i].getY());
         }
     }
 }
