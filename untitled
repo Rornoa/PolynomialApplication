@@ -1,0 +1,26 @@
+ 
+ double[] result = new double[nodes.length - 1];
+ double[] tmp1 = new double[nodes.length - 1];
+ double[] tmp2 = new double[nodes.length - 2];
+
+  for (int i = 0; i < len - 2; i++) {
+            for (int j = 0; j < len - 2 - i; j++) {
+                tmp2[j] = (tmp1[j+1] - tmp1[j]) / (points[j+i+2].getX() - points[j].getX());
+            }
+            result[i + 1] = tmp2[0];
+            tmp1 = tmp2;
+            tmp2 = new double[len+1];
+        }
+
+  double[] result = new double[array.length];
+  double[] temp1 = new double[array.length];
+  double[] temp2 = new double[array.length];
+
+  for (int i = 0; i < len; i++){
+            for (int j = 0; j < len; j++){
+                tmp2[j] = (tmp1[j+1] - tmp1[j]) / (points[j+1].getX() - points[j].getX());
+            }
+            result[i] = tmp2[i];
+            tmp1 = tmp2;
+            tmp2 = new double[len];
+        }
