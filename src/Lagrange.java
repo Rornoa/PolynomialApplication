@@ -2,8 +2,7 @@ public class Lagrange extends Polynomial {
 
     Polynomial result = new Polynomial();
 
-    public Lagrange(Grid grid){
-        Point[] points = grid.getPoints();
+    public Lagrange( Point[] points){
         double k=1;
         int len = points.length;
         Polynomial bi = new Polynomial();

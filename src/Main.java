@@ -4,14 +4,14 @@ public class Main {
         Grid grid = new Grid(6, 1, 7);
         Point[] points = grid.getPoints();
 
-        Polynomial lagrange = new Lagrange(grid);
+        Polynomial lagrange = new Lagrange(points);
         System.out.printf("Lagrange polynomial:\t");
         lagrange = ((Lagrange) lagrange).getResult();
         lagrange.print();
         Grid lGrid = new Grid(6, 1, 7);
 
-        Polynomial newton = new Newton(grid);
-        System.out.printf("Newton polynomial:\t");
+        Polynomial newton = new Newton(points);
+        System.out.printf("\nNewton polynomial:\t");
         newton = ((Newton) newton).getResult();
         newton.print();
         Grid nGrid = new Grid(6,1,7);
