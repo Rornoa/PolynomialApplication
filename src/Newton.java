@@ -46,8 +46,6 @@ public class Newton extends Polynomial {
             }
             res[i+1] = tmp2[0];
             tmp1 = tmp2;
-            double[] t = tmp1;
-            tmp2 = t;
             len=len-1;
         }
         return res;
