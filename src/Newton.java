@@ -36,11 +36,11 @@ public class Newton extends Polynomial {
         double[] tmp2 = new double[len];
 
         res[0]=points[0].getY();
-        for (int i = 1; i < points.length-1; i++) {
+        for (int i = 1; i < len-1; i++) {
             tmp1[i]= (points[i+1].getY() - points[i].getY()) / (points[i+1].getX() - points[i].getX());
         }
         len=len-1;
-        for (int i = 2; i < len; i++) {
+        for (int i = 2; i < points.length; i++) {
             for (int j = 0; j < len-1; j++) {
                 tmp2[j] = (tmp1[j + 1] - tmp1[j]) / (points[j + i].getX() - points[j].getX());
             }
