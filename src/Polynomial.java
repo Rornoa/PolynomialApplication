@@ -18,11 +18,11 @@ public class Polynomial {
 
     public void print() {
         Monomial tmp = head;
-        while (head != null) {
-            System.out.print(head.coef + "X^" + head.pow + " + ");
-            head = head.next;
+        System.out.println("");
+        while (tmp != null) {
+            System.out.print(tmp.coef + "X^" + tmp.pow + " + ");
+            tmp = tmp.next;
         }
-        head = tmp;
     }
 
     public double solveByHorner(double x) {

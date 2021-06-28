@@ -1,27 +1,20 @@
 public class Main {
     public static void main(String[] args) {
-
-        Grid grid = new Grid(6, 1, 7);
+        Grid grid = new Grid(6, 0, Math.PI);
         Point[] points = grid.getPoints();
 
         Polynomial lagrange = new Lagrange(points);
-        System.out.printf("Lagrange polynomial:\t");
-        lagrange = ((Lagrange) lagrange).getResult();
         lagrange.print();
-        Grid lGrid = new Grid(6, 1, 7);
+        lagrange = ((Lagrange) lagrange).getResult();
 
         Polynomial newton = new Newton(points);
-        System.out.printf("\nNewton polynomial:\t");
-        newton = ((Newton) newton).getResult();
         newton.print();
-        Grid nGrid = new Grid(6,1,7);
-
-        Grid control = new Grid(6, 1, 7);
+        newton = ((Newton) newton).getResult();
 
         System.out.println("\n");
         System.out.printf("%4s\t%-16s%-16s%-16s%-16s%-16s%n", "Point", "x", "y", "f(x)", "Lagrange", "Newton");
         for (int i = 0; i < 6; i++) {
-            System.out.printf("%4d%16e%16e%16e%16e%16e%n", i, control.getPoints()[i].getX(), grid.getPoints()[i].getY(), control.getPoints()[i].getY(), lGrid.getPoints()[i].getY(), nGrid.getPoints()[i].getY());
+            System.out.printf("%4d%16e%16e%16e%16e%16e%n", i, grid.getPoints()[i].getX(), grid.getPoints()[i].getY(), grid.getPoints()[i].getY(), lagrange.solveByHorner(grid.getPoints()[i].getX()), newton.solveByHorner(grid.getPoints()[i].getX()));
         }
     }
 }
