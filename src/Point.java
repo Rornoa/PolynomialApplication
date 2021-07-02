@@ -1,17 +1,17 @@
-public class Point {
+ class Point {
     private double x;
     private double y;
 
-    public Point(double x, double y){
+     Point(double x, double y){
         this.x = x;
         this.y = y;
     }
 
-    public double getY() {
+     double getY() {
         return y;
     }
 
-    public double getX() {
+    double getX() {
         return x;
     }
 }

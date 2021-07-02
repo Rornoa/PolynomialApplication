@@ -1,21 +1,23 @@
-public class Grid {
+ class Grid {
 
     private Point[] points;
-
-    public Grid(int amount, double a, double b){
+   private double gap;
+     Grid(int amount, double a, double b){
         points = new Point[amount];
-        points[0] = new Point(a,0);
-        points[amount-1] = new Point(b,f(b));
-        for (int i = 0; i < amount; i++) {
-            points[i] = new Point(a +(i*((b-a) / (amount-1))),f(i+2));
-        }
+        gap = (b-a)/(amount - 1);
+        for (int i = 0; i < amount; i++)
+            points[i] = new Point(a + (i*gap),f(a+(i*gap)));
     }
 
-    public double f(double x){
-        return Math.sin(x);
+   double f(double x){
+        return Math.sin(x*x/2);
     }
 
-    public Point[] getPoints() {
+     Point[] getPoints() {
         return points;
     }
-}
+
+      double getGap() {
+         return gap;
+     }
+ }

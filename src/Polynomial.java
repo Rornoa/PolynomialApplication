@@ -1,13 +1,13 @@
 public class Polynomial {
 
-    Monomial head;
+  private Monomial head;
 
-    public void addMon(double coef, int pow) {
+     void addMon(double coef, int pow) {
         if (head == null)
             head = new Monomial(
                     coef,
                     pow);
-        if (head != null && pow > head.pow) {
+        if (pow > head.pow) {
             Monomial tmp = head;
             head = new Monomial(
                     coef,
@@ -18,14 +18,15 @@ public class Polynomial {
 
     public void print() {
         Monomial tmp = head;
-        System.out.println("");
+        System.out.println();
         while (tmp != null) {
             System.out.print(tmp.coef + "X^" + tmp.pow + " + ");
             tmp = tmp.next;
         }
+        System.out.println();
     }
 
-    public double solveByHorner(double x) {
+     double solveByHorner(double x) {
         Monomial tmp = this.head;
         int max = tmp.pow;
         double y = 0;
@@ -42,7 +43,7 @@ public class Polynomial {
     }
 
 
-    public void multiply(double c) {
+     void multiply(double c) {
         if (head == null)
             return;
         if (c == 0)
@@ -55,18 +56,10 @@ public class Polynomial {
         head = tmp;
     }
 
-    public void addition(Polynomial p1) {
+     void addition(Polynomial p1) {
         if (p1.head == null) return;
         if (head == null) {
-            head = new Monomial(
-                    p1.head.coef,
-                    p1.head.pow);
-            for (Monomial i = p1.head.next; i != null; i = i.next) {
-                head.next = new Monomial(
-                        i.coef,
-                        i.pow);
-                head = head.next;
-            }
+            head = p1.head;
             return;
         }
         Monomial cur1 = head;
@@ -113,14 +106,14 @@ public class Polynomial {
         head = head.next;
     }
 
-    public void change(double coef) {
+     void change(double coef) {
         Monomial m = head;
         while (m.next != null)
             m = m.next;
         m.coef = coef;
     }
 
-    public void multiplication(Polynomial p1) {
+     void multiplication(Polynomial p1) {
         if (p1.head == null || head == null) return;
 
 
@@ -159,7 +152,7 @@ public class Polynomial {
         head = resH;
     }
 
-    public void deleteZeros() {
+     void deleteZeros() {
         Monomial t1 = head;
         Monomial t2 = head.next;
         while (t2 != null) {

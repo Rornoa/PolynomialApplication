@@ -1,15 +1,14 @@
 public class Lagrange extends Polynomial {
 
-    Polynomial result = new Polynomial();
 
-    public Lagrange(Point[] points){
-        double k=1;
+     Lagrange(Point[] points){
         int len = points.length;
         Polynomial p1 = new Polynomial();
         p1.addMon(-1,0);
         p1.addMon(1,1);
 
         for (int i = 0; i < len; i++) {
+            double k=1;
             Polynomial p2 = new Polynomial();
             p2.addMon(1,0);
 
@@ -30,19 +29,14 @@ public class Lagrange extends Polynomial {
 
             k *= points[i].getY();
             p2.multiply(k);
-            result.addition(p2);
+            addition(p2);
         }
-        result.deleteZeros();
-        result.print();
+        deleteZeros();
     }
 
     @Override
     public void print() {
         System.out.print("Lagrange polynomial");
         super.print();
-    }
-
-    public Polynomial getResult() {
-        return result;
     }
 }
